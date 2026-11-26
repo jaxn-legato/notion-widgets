@@ -16,17 +16,17 @@
   --line:rgba(143,199,162,.25);
 }
 *{box-sizing:border-box}
-html,body{margin:0}
+html,body{margin:0;height:100%}
 /* Notion dark mode page color, so the iframe blends in instead of flashing white */
 body{background:#191919;padding:6px;color:var(--ink);-webkit-font-smoothing:antialiased}
-.card{position:relative;display:flex;align-items:stretch;width:100%;min-height:160px;border:1.5px solid var(--line);border-radius:22px;background:linear-gradient(100deg,var(--bg) 0%,var(--bg2) 100%);overflow:hidden;transition:box-shadow .3s,transform .3s}
+.card{position:relative;display:flex;align-items:stretch;width:100%;min-height:calc(100vh - 12px);border:1.5px solid var(--line);border-radius:22px;background:linear-gradient(100deg,var(--bg) 0%,var(--bg2) 100%);overflow:hidden;transition:box-shadow .3s,transform .3s}
 .card:hover{box-shadow:0 6px 24px rgba(63,125,90,.28);transform:translateY(-1px)}
 
 /* sprigs: always swaying gently, a little livelier on hover */
 .sprig{position:absolute;pointer-events:none}
-.sprig.l{left:-28px;bottom:-44px;width:128px;opacity:.95;transform-origin:12% 94%;animation:swayL 5.2s ease-in-out infinite alternate}
-.sprig.r{right:-16px;top:-26px;width:180px;transform-origin:50% 50%;animation:swayR 6.4s ease-in-out infinite alternate}
-.sprig.c{left:46%;bottom:-54px;width:120px;opacity:.38;transform-origin:50% 100%;animation:swayC 7.8s ease-in-out infinite alternate}
+.sprig.l{left:calc(-.22 * clamp(90px,16vw,170px));bottom:calc(-.36 * clamp(90px,16vw,170px));width:clamp(90px,16vw,170px);opacity:.95;transform-origin:12% 94%;animation:swayL 5.2s ease-in-out infinite alternate}
+.sprig.r{right:calc(-.1 * clamp(120px,22vw,230px));top:calc(-.15 * clamp(120px,22vw,230px));width:clamp(120px,22vw,230px);transform-origin:50% 50%;animation:swayR 6.4s ease-in-out infinite alternate}
+.sprig.c{left:46%;bottom:calc(-.45 * clamp(90px,15vw,150px));width:clamp(90px,15vw,150px);opacity:.38;transform-origin:50% 100%;animation:swayC 7.8s ease-in-out infinite alternate}
 .card:hover .sprig.l{animation-duration:2.6s}
 .card:hover .sprig.r{animation-duration:3.2s}
 @keyframes swayL{from{transform:rotate(-3deg)}to{transform:rotate(3.5deg)}}
@@ -34,26 +34,23 @@ body{background:#191919;padding:6px;color:var(--ink);-webkit-font-smoothing:anti
 @keyframes swayC{from{transform:rotate(-2deg)}to{transform:rotate(2.5deg)}}
 @media (prefers-reduced-motion:reduce){.sprig{animation:none !important}}
 
-.half{position:relative;z-index:1;flex:1 1 0;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:7px;padding:24px clamp(22px,4vw,48px)}
-.half.l{padding-left:clamp(64px,9vw,120px)}
-.half.r{padding-right:clamp(48px,8vw,120px)}
-.mid{position:relative;z-index:1;flex:none;width:1px;margin:26px 0;background:var(--line)}
+.half{position:relative;z-index:1;flex:1 1 0;min-width:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:clamp(4px,1vh,10px);padding:clamp(14px,4vh,30px) clamp(22px,4vw,56px)}
+.mid{position:relative;z-index:1;flex:none;width:1px;margin:clamp(16px,4vh,30px) 0;background:var(--line)}
 .mid::after{content:"";position:absolute;left:50%;top:50%;width:9px;height:9px;border-radius:50% 0;background:var(--g2);transform:translate(-50%,-50%) rotate(45deg)}
 
-.kick{font:600 11px/1 Inter,system-ui,sans-serif;letter-spacing:.32em;text-transform:uppercase;color:var(--g)}
-.date{font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-weight:600;font-size:clamp(26px,3.6vw,40px);line-height:1.08;color:var(--g)}
-.time{font:600 clamp(20px,2.6vw,30px)/1.15 Inter,system-ui,sans-serif;color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:.01em}
-.left{font:500 13.5px/1.4 Inter,system-ui,sans-serif;color:var(--mute)}
+.kick{font:600 clamp(9px,1.3vw,13px)/1 Inter,system-ui,sans-serif;letter-spacing:.32em;text-transform:uppercase;color:var(--g)}
+.date{font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-weight:600;font-size:clamp(22px,4.4vw,54px);line-height:1.08;color:var(--g)}
+.time{font:600 clamp(17px,3vw,38px)/1.15 Inter,system-ui,sans-serif;color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:.01em}
+.left{font:500 clamp(11px,1.6vw,17px)/1.4 Inter,system-ui,sans-serif;color:var(--mute)}
 
-.quote{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;font-size:clamp(15px,1.75vw,20px);line-height:1.32;color:var(--ink);max-width:48ch}
+.quote{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;font-size:clamp(13px,2vw,24px);line-height:1.32;color:var(--ink);max-width:48ch}
 .quote b{font-weight:600;font-style:italic;color:var(--g)}
-.who{font:500 12.5px/1.4 Inter,system-ui,sans-serif;color:var(--mute);letter-spacing:.06em}
+.who{font:500 clamp(10px,1.5vw,15px)/1.4 Inter,system-ui,sans-serif;color:var(--mute);letter-spacing:.06em}
 
 @media (max-width:620px){
   .card{flex-direction:column}
   .mid{width:auto;height:1px;margin:0 28px}
-  .half,.half.l,.half.r{padding:18px 26px}
-  .half.l{padding-right:84px}
+  .half{padding:18px 26px}
   .sprig.l{display:none}
   .sprig.c{display:none}
   .sprig.r{width:112px}
@@ -79,16 +76,23 @@ body{background:#191919;padding:6px;color:var(--ink);-webkit-font-smoothing:anti
 </div>
 <script>
 function pad(n){return String(n).padStart(2,'0')}
-var GREET=[[0,5,'Still up'],[5,12,'Good morning'],[12,17,'Good afternoon'],[17,21,'Good evening'],[21,24,'Winding down']];
+var GREET=[
+[0,5,["Up at this hour? Bold.","My sensors say bedtime was hours ago.","Whatever it is, it will still be broken at 9 a.m.","Running on fumes and stubbornness, I see.","I'll keep the lights on. You go sleep.","Even I reboot occasionally, sir.","Night mode engaged. Reluctantly."]],
+[5,12,["Systems online. Good morning, sir.","Good morning. The world survived the night.","Coffee first. Heroics second.","Morning briefing ready whenever you are.","Rise and shine. The Big 3 await.","All systems nominal. You, however, need breakfast.","I've been up for hours. Not that I'm keeping score."]],
+[12,17,["Afternoon status: operational.","Midday check: momentum holding.","Half the day down. The better half remains.","Might I suggest finishing one thing before starting four more?","Productivity readings are... respectable.","Lunch was not optional, sir.","Running diagnostics: you need a stretch."]],
+[17,21,["Welcome back. Shall we review the day?","Evening protocols engaged.","The day's work is logged. Dinner is advised.","You've earned the slow hours, sir.","Tomorrow is drafting itself. Care to supervise?","Dimming the lights. Metaphorically."]],
+[21,24,["Might I suggest powering down.","Initiating wind-down sequence.","Tomorrow's Big 3, then lights out.","Sleep mode is not a weakness, sir.","Closing today's files. Well done.","I'll take the night watch from here.","Low power mode: highly recommended."]]];
+var curSlot=-1,line='';
 function paint(){
   var d=new Date(),h=d.getHours();
-  var g=GREET.filter(function(x){return h>=x[0]&&h<x[1]})[0];
+  var si=0;for(var i=0;i<GREET.length;i++){if(h>=GREET[i][0]&&h<GREET[i][1]){si=i;break}}
+  if(si!==curSlot){curSlot=si;var p=GREET[si][2];line=p[Math.floor(Math.random()*p.length)]}
   var hh=h%12||12,ap=h>=12?'pm':'am';
   var lastDay=new Date(d.getFullYear(),d.getMonth()+1,0).getDate();
   var left=lastDay-d.getDate();
   var month=d.toLocaleDateString('en-US',{month:'long'});
   var leftTxt=left===0?'Last day of '+month:left+(left===1?' day':' days')+' left in '+month;
-  document.getElementById('k1').textContent=g[2];
+  document.getElementById('k1').textContent=line;
   document.getElementById('dt').textContent=d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
   document.getElementById('tm').textContent=hh+':'+pad(d.getMinutes())+' '+ap;
   document.getElementById('lm').textContent=leftTxt;
