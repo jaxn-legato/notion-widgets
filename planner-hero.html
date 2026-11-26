@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Planner Hero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Inter:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --g:#8fc7a2;        /* bright leaf green (accent) */
+  --g2:#6fa585;       /* stem green */
+  --leaf:#4e7a5e;     /* leaf fill */
+  --leaf2:#2c4235;    /* deep leaf fill */
+  --ink:#e6efe8;      /* text */
+  --mute:rgba(230,239,232,.62);
+  --bg:#16211b;       /* card gradient start */
+  --bg2:#1d2b23;      /* card gradient end */
+  --line:rgba(143,199,162,.25);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+/* Notion dark mode page color, so the iframe blends in instead of flashing white */
+body{background:#191919;padding:6px;color:var(--ink);-webkit-font-smoothing:antialiased}
+.card{position:relative;display:flex;align-items:stretch;width:100%;min-height:160px;border:1.5px solid var(--line);border-radius:22px;background:linear-gradient(100deg,var(--bg) 0%,var(--bg2) 100%);overflow:hidden;transition:box-shadow .3s,transform .3s}
+.card:hover{box-shadow:0 6px 24px rgba(63,125,90,.28);transform:translateY(-1px)}
+
+/* sprigs: always swaying gently, a little livelier on hover */
+.sprig{position:absolute;pointer-events:none}
+.sprig.l{left:-28px;bottom:-44px;width:128px;opacity:.95;transform-origin:12% 94%;animation:swayL 5.2s ease-in-out infinite alternate}
+.sprig.r{right:-16px;top:-26px;width:180px;transform-origin:50% 50%;animation:swayR 6.4s ease-in-out infinite alternate}
+.sprig.c{left:46%;bottom:-54px;width:120px;opacity:.38;transform-origin:50% 100%;animation:swayC 7.8s ease-in-out infinite alternate}
+.card:hover .sprig.l{animation-duration:2.6s}
+.card:hover .sprig.r{animation-duration:3.2s}
+@keyframes swayL{from{transform:rotate(-3deg)}to{transform:rotate(3.5deg)}}
+@keyframes swayR{from{transform:scaleX(-1) rotate(157deg)}to{transform:scaleX(-1) rotate(163deg)}}
+@keyframes swayC{from{transform:rotate(-2deg)}to{transform:rotate(2.5deg)}}
+@media (prefers-reduced-motion:reduce){.sprig{animation:none !important}}
+
+.half{position:relative;z-index:1;flex:1 1 0;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:7px;padding:24px clamp(22px,4vw,48px)}
+.half.l{padding-left:clamp(64px,9vw,120px)}
+.half.r{padding-right:clamp(48px,8vw,120px)}
+.mid{position:relative;z-index:1;flex:none;width:1px;margin:26px 0;background:var(--line)}
+.mid::after{content:"";position:absolute;left:50%;top:50%;width:9px;height:9px;border-radius:50% 0;background:var(--g2);transform:translate(-50%,-50%) rotate(45deg)}
+
+.kick{font:600 11px/1 Inter,system-ui,sans-serif;letter-spacing:.32em;text-transform:uppercase;color:var(--g)}
+.date{font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-weight:600;font-size:clamp(26px,3.6vw,40px);line-height:1.08;color:var(--g)}
+.time{font:600 clamp(20px,2.6vw,30px)/1.15 Inter,system-ui,sans-serif;color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:.01em}
+.left{font:500 13.5px/1.4 Inter,system-ui,sans-serif;color:var(--mute)}
+
+.quote{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;font-size:clamp(15px,1.75vw,20px);line-height:1.32;color:var(--ink);max-width:48ch}
+.quote b{font-weight:600;font-style:italic;color:var(--g)}
+.who{font:500 12.5px/1.4 Inter,system-ui,sans-serif;color:var(--mute);letter-spacing:.06em}
+
+@media (max-width:620px){
+  .card{flex-direction:column}
+  .mid{width:auto;height:1px;margin:0 28px}
+  .half,.half.l,.half.r{padding:18px 26px}
+  .half.l{padding-right:84px}
+  .sprig.l{display:none}
+  .sprig.c{display:none}
+  .sprig.r{width:112px}
+}
+</style></head>
+<body>
+<div class="card" aria-label="Today's date and a reminder to act">
+<svg class="sprig l" viewBox="0 0 160 160" aria-hidden="true"><path d="M10 150 C44 118 72 90 148 20" fill="none" stroke="var(--g2)" stroke-width="2.4" stroke-linecap="round"/><g fill="var(--leaf)"><ellipse cx="42" cy="114" rx="16" ry="6" transform="rotate(-60 42 114)"/><ellipse cx="60" cy="124" rx="16" ry="6" transform="rotate(12 60 124)"/><ellipse cx="76" cy="80" rx="15" ry="6" transform="rotate(-62 76 80)"/><ellipse cx="95" cy="92" rx="15" ry="6" transform="rotate(8 95 92)"/><ellipse cx="110" cy="50" rx="14" ry="5.5" transform="rotate(-58 110 50)"/><ellipse cx="127" cy="60" rx="14" ry="5.5" transform="rotate(6 127 60)"/></g><g fill="var(--leaf2)"><ellipse cx="25" cy="133" rx="12" ry="5" transform="rotate(16 25 133)"/><ellipse cx="139" cy="28" rx="11" ry="4.5" transform="rotate(-48 139 28)"/></g></svg>
+<svg class="sprig r" viewBox="0 0 160 160" aria-hidden="true"><path d="M10 150 C44 118 72 90 148 20" fill="none" stroke="var(--g2)" stroke-width="2.4" stroke-linecap="round"/><g fill="var(--leaf)"><ellipse cx="42" cy="114" rx="16" ry="6" transform="rotate(-60 42 114)"/><ellipse cx="60" cy="124" rx="16" ry="6" transform="rotate(12 60 124)"/><ellipse cx="76" cy="80" rx="15" ry="6" transform="rotate(-62 76 80)"/><ellipse cx="95" cy="92" rx="15" ry="6" transform="rotate(8 95 92)"/><ellipse cx="110" cy="50" rx="14" ry="5.5" transform="rotate(-58 110 50)"/></g><circle cx="100" cy="66" r="5" fill="var(--g)"/></svg>
+<svg class="sprig c" viewBox="0 0 160 160" aria-hidden="true"><path d="M80 158 C78 120 80 90 82 40" fill="none" stroke="var(--g2)" stroke-width="2.2" stroke-linecap="round"/><g fill="var(--leaf2)"><ellipse cx="68" cy="120" rx="17" ry="6" transform="rotate(-28 68 120)"/><ellipse cx="95" cy="104" rx="17" ry="6" transform="rotate(26 95 104)"/><ellipse cx="66" cy="84" rx="16" ry="6" transform="rotate(-30 66 84)"/><ellipse cx="96" cy="68" rx="16" ry="6" transform="rotate(28 96 68)"/><ellipse cx="82" cy="44" rx="14" ry="5.5" transform="rotate(88 82 44)"/></g></svg>
+<div class="half l">
+<div class="kick" id="k1">Today</div>
+<div class="date" id="dt">&nbsp;</div>
+<div class="time" id="tm">&nbsp;</div>
+<div class="left" id="lm">&nbsp;</div>
+</div>
+<div class="mid"></div>
+<div class="half r">
+<div class="kick">Go get busy</div>
+<div class="quote">&ldquo;Inaction breeds doubt and fear. Action breeds confidence and courage. If you want to conquer fear, do not sit home and think about it. <b>Go out and get busy.</b>&rdquo;</div>
+<div class="who">&mdash;&nbsp;Dale Carnegie</div>
+</div>
+</div>
+<script>
+function pad(n){return String(n).padStart(2,'0')}
+var GREET=[[0,5,'Still up'],[5,12,'Good morning'],[12,17,'Good afternoon'],[17,21,'Good evening'],[21,24,'Winding down']];
+function paint(){
+  var d=new Date(),h=d.getHours();
+  var g=GREET.filter(function(x){return h>=x[0]&&h<x[1]})[0];
+  var hh=h%12||12,ap=h>=12?'pm':'am';
+  var lastDay=new Date(d.getFullYear(),d.getMonth()+1,0).getDate();
+  var left=lastDay-d.getDate();
+  var month=d.toLocaleDateString('en-US',{month:'long'});
+  var leftTxt=left===0?'Last day of '+month:left+(left===1?' day':' days')+' left in '+month;
+  document.getElementById('k1').textContent=g[2];
+  document.getElementById('dt').textContent=d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
+  document.getElementById('tm').textContent=hh+':'+pad(d.getMinutes())+' '+ap;
+  document.getElementById('lm').textContent=leftTxt;
+}
+paint();setInterval(paint,1000);
+</script>
+</body></html>
